@@ -37,7 +37,6 @@ const addCustomer = async (customer) => {
      <>
    {JSON.stringify(customername)}
      </> 
-
      )
 };
 
