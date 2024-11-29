@@ -10,9 +10,12 @@ import AddCustomer from "./AddCustomer";
 import { addCustomer } from "./api";
 import { Button } from "@mui/material";
 import AddTraining from "./AddTraining";
+import CsvDownloadButton from 'react-json-to-csv'
+import React from "react";
 
 export default function Customerlist(){
 
+    
 const queryClient = useQueryClient();
 
 const {data: customers}= useQuery({
@@ -29,7 +32,6 @@ const deleteMutation = useMutation({
     mutationFn: deleteCustomer,
     onSuccess: () => queryClient.invalidateQueries(['customers'])
 })
-
 
 
 const [columnDefs, setColumnDefs] = useState([
@@ -50,19 +52,29 @@ const [columnDefs, setColumnDefs] = useState([
         filter: false,
         cellRenderer: params => <Button onClick={() => deleteMutation.mutate(params.data._links.self.href)}>Delete</Button>
     },
-
+     {field: '_links.self.href',
+         headerName: '',
+         sortable: false,
+         filter: false,
+        cellRenderer: params => <AddTraining currentCustomer={params.data._links.self.href} />
+     },
 ]);
 
 useEffect(()=> fetchCustomers,[])
+
+
  return (
 <div className="ag-theme-material" style={{width: 1600, height: 1000}}>
     <AddCustomer addCustomer= {customer => addMutation.mutate(customer)} />
+    <CsvDownloadButton data={customers} headers={['firstname', 'lastname', 'streetaddress','postcode', 'city', 'email', 'phone']} />
  <AgGridReact 
  rowData={customers}
  columnDefs={columnDefs}
  accentedSort={true}
  />
-
+ 
 </div>
  )
+
 }
+

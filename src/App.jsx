@@ -1,8 +1,6 @@
 import './App.css';
 import { Typography, AppBar, Container, CssBaseline, Toolbar } from '@mui/material';
-
 import { Link, Outlet } from 'react-router-dom';
-import Customerlist from './CustomerList';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
@@ -19,6 +17,7 @@ function App() {
               <nav>
                 <Link to={"/"}>Trainings</Link>
                 <Link to={"/customers"}>customers</Link>
+                <Link to={"/calendar"}>calendar</Link>
               </nav>
             </Typography>
           </Toolbar>

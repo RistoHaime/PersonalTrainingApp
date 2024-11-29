@@ -22,23 +22,20 @@ const addCustomer = async (customer) => {
       return data;
   }
 
- function FetchCustomerByUrl({url}) {
+  function FetchCustomerByUrl({ url }) {
     console.log(url);
     fetch(url)
-.then(response => response.json())
-.then(data => {
-  const customername = data.firstname;
-  console.log(JSON.stringify(customername))
-})
-.catch(err => {
-  // Something went wrong
-});
-    return (
-     <>
-   {JSON.stringify(customername)}
-     </> 
-     )
-};
+      .then((response) => response.json())
+      .then((data) => {
+        const customername = data.firstname;
+        console.log("Customer fetched", JSON.stringify(customername));
+        return customername;
+      })
+      .catch((err) => {
+        // Something went wrong
+        console.log(err);
+      });
+  }
 
 const deleteCustomer = async (url) => {
   const options = {
