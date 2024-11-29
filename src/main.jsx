@@ -2,17 +2,22 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import Customerlist from './CustomerList.jsx';
 import Traininglist from './Trainingslist.jsx';
 import { RouterProvider } from 'react-router-dom';
 import Calendar from './Calendar.jsx';
 
-const router = createBrowserRouter([  
+const router = createHashRouter([  
   {
+    basename: import.meta.env.BASE_URL
+  },
+  {
+    
     path: "/",
     element: <App />,
-    children: [                       
+    children: [            
+                
       {
         element: <Traininglist />,
         index: true   
